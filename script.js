@@ -30,13 +30,33 @@ const updatePlayIcon = () => {
 //=======================================
 
 //Update progress and timestamp functionality
+//currentTime property
+//duration property
+//the progress bar-->the bar that shows how much from the video was played is targeted with progress.value ,we`ve given the class of progress to the input type range in index.html
+//we need to divide video.currentTime to video.duration and multiply it with 100 to give us a percentage
 const updateProgress = () => {
-  return true;
+  progress.value = (video.currentTime / video.duration) * 100;
+
+  //get minutes
+  let mins = Math.floor(video.currentTime / 60);
+  if (mins < 10) {
+    mins = "0" + String(mins);
+  }
+
+  //Get seconds
+  let secs = Math.floor(video.currentTime % 60);
+  if (secs < 10) {
+    secs = "0" + String(secs);
+  }
+
+  timestamp.innerHTML = `${mins}:${secs}`;
 };
 //=================================
+
 //Set video time to progress functionality
+//we do this so that we can move the progress bar wherever we want on the duration of the video
 const setVideoProgress = () => {
-  return true;
+  video.currentTime = (+progress.value * video.duration) / 100;
 };
 //===============================
 
